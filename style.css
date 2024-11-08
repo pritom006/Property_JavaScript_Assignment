@@ -167,7 +167,7 @@ body {
 .btn {
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    border: 1px solid var(--border-color);
+    border: 1px solid black;
     background: white;
     cursor: pointer;
     display: flex;
@@ -180,21 +180,30 @@ body {
     color: red;
 }
 
+
 .btn-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
+    top: -10px;
+    left: -10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
+
 
 .share-modal {
     position: fixed;
-    top: 0;
+    top: 11rem;
     right: 0;
-    width: 300px;
+    width: 400px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -202,21 +211,60 @@ body {
     z-index: 100;
 }
 
+
+
 .share-modal.hidden {
     display: none;
 }
 
+
 .share-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: relative;
 }
+
 
 .share-icons {
     display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+    justify-content: space-around;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
 }
+
+.share-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.property-info-share {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.property-details-share {
+    flex: 1;
+}
+
+.property-details-share .country-share {
+    color: #666;
+    font-size: 14px;
+    margin: 0 0 5px 0;
+}
+
+.property-details-share h3 {
+    font-size: 16px;
+    margin: 0 0 5px 0;
+    line-height: 1.4;
+}
+
+.property-details-share .rating-share {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
 
 .share-icon {
     display: flex;
@@ -224,6 +272,18 @@ body {
     align-items: center;
     text-decoration: none;
     color: inherit;
+    gap: 5px;
+}
+
+.share-icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.share-icon span {
+    font-size: 12px;
+    color: #666;
 }
 
 .icon {
@@ -271,7 +331,6 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    cursor: pointer;
 }
 
 .last-image {
@@ -304,15 +363,6 @@ body {
     z-index: 1000;
 }
 
-/* .modal-content {
-    position: relative;
-    width: 80%;
-    height: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
 .modal-content {
     position: relative;
     width: 80%;
@@ -333,26 +383,10 @@ body {
 }
 
 .modal-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-/* .modal-image {
     max-width: 90%;
     max-height: 80vh;
     object-fit: contain;
-} */
-
-/* .close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-    z-index: 1001;
-} */
+}
 
 .close {
     position: absolute;
@@ -386,17 +420,11 @@ body {
 }
 
 .nav-button {
-    /* position: absolute; */
     display: flex;
     width: 40px;
     height: 40px;
-    /* top: 50%; */
-    /* transform: translateY(-50%); */
-    /* background: rgba(255, 255, 255, 0.1); */
     background: #fff;
-    /* color: white; */
     color: #000;
-    /* padding: 1rem; */
     cursor: pointer;
     border: none;
     border-radius: 50%;
@@ -420,7 +448,6 @@ body {
 
 .image-counter {
     position: absolute;
-    /* bottom: 20px; */
     right: 20px;
     color: white;
     font-size: 14px;
@@ -522,7 +549,6 @@ body {
 .details {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
     gap: 1.5rem;
     margin-bottom: 2rem;
 }
@@ -633,7 +659,6 @@ body {
   .cancel-date {
     font-size: 14px;
     color: gray;
-    /* color: var(--success-green); */
   }
 
   .dates-available {
@@ -962,9 +987,6 @@ body {
 
 
 .rooms-container {
-    /* display: grid;
-    grid-template-columns: 2fr 1fr; */
-    /* gap: 2rem; */
     padding: 2rem;
     max-width: 1400px;
     border-top: 1px solid #e0e0e0;
@@ -1076,8 +1098,6 @@ body {
 }
 
 .about-container {
-    /* display: grid;
-    grid-template-columns: 2fr 1fr; */
     font-family: Arial, sans-serif;
     max-width: 1400px;
     padding: 2rem;
@@ -1275,7 +1295,6 @@ body {
 .search-section {
     margin-top: 48px;
     max-width: 800px;
-    /* margin-left: auto; */
     margin-right: auto;
     padding: 2px 30px 5px 0px;
 }
@@ -1556,7 +1575,6 @@ body {
     font-size: 14px;
     color: #666;
     min-width: 120px;
-    /* margin-bottom: 0.5rem; */
 }
 
 .policy-details {
@@ -1576,11 +1594,6 @@ body {
     line-height: 1.5;
 }
 
-/* .divider {
-    height: 1px;
-    background: #ddd;
-    margin: 2rem 0;
-} */
 
 /* Important and Faq section */
 
@@ -2208,28 +2221,6 @@ body {
         padding: 0 16px;
     }
 
-    /* .reviews-section {
-        flex-direction: column;
-        gap: 24px;
-    }
-
-    .review-card {
-        min-width: 100%;
-    }
-    
-    .carousel-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 16px;
-    }
-
-    .reviews-score {
-        min-width: unset;
-    }
-
-    .reviews-grid {
-        grid-template-columns: 1fr;
-    } */
 }
 
 

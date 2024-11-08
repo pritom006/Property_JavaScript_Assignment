@@ -44,6 +44,16 @@
                             <option value="GB">United Kingdom</option>
                             <option value="FR">France</option>
                             <option value="DE">Germany</option>
+                            <option value="CA">Canada</option>
+                            <option value="AU">Australia</option>
+                            <option value="JP">Japan</option>
+                            <option value="CN">China</option>
+                            <option value="BR">Brazil</option>
+                            <option value="MX">Mexico</option>
+                            <option value="RU">Russia</option>
+                            <option value="IN">India</option>
+                            <option value="ZA">South Africa</option>
+                            <option value="SE">Sweden</option>
                         </select>
                     </div>
                 </div>
@@ -65,7 +75,7 @@
         <a href="#" class="back-link">← See all properties</a>
         <div class="action-buttons">
             <button class="btn" id="share-btn">
-                ⎋ Share
+                ↥ Share
             </button>
             <button class="btn btn-red" id="love-btn">
                 <i class="heart-icon" id="heart-icon">♡</i> Save
@@ -73,31 +83,39 @@
         </div>
     </div>
 
+    <!-- Share Modal -->
     <div class="share-modal hidden" id="share-modal">
-        <div class="share-content">
-            <img src="assets/house-resort.jpeg" alt="Vacation Home" class="share-image">
-            <h3>Juneau Vacation Home: Stunning View + Beach Access</h3>
+        <div class="share-content">            
+            <button class="btn-close" id="close-modal">✕</button>
+            <div class="property-info-share">
+                <img src="assets/Juneau.jpg" alt="Vacation Home" class="share-image">
+                <div class="property-details-share">
+                    <p class="country-share">United States of America</p>
+                    <h3>Juneau Vacation Home: Stunning View + Beach Access</h3>
+                    <p class="rating-share">4.6/10</p>
+                </div>
+            </div>
             <div class="share-icons">
-                <a href="#" class="share-icon" onclick="copyToClipboard()">
-                    <i class="icon">&#x1F4CC;</i> Copy Link
+                <a href="#" class="share-icon">
+                    💬
+                    <span>Messenger</span>
                 </a>
                 <a href="#" class="share-icon">
-                    <i class="icon">&#x1F4E2;</i> Message
+                    📲
+                    <span>WhatsApp</span>
                 </a>
-                <a href="#" class="share-icon">
-                    <i class="icon">&#x1F4F7;</i> Facebook
+                <a href="#" class="share-icon" id="copy-link">
+                    🔗 
+                    <span>Copy link</span>
                 </a>
             </div>
-            <button class="btn-close" id="close-modal">
-                ✕
-            </button>
         </div>
     </div>
 
     <!-- Gallery Section -->
     <div class="gallery-container">
         <div class="main-image">
-            <img src="assets/house-resort.jpeg" alt="Waterfront deck view" />   
+            <img src="assets/Juneau.jpg" alt="Waterfront deck view" />   
         </div>
         <div class="gallery-grid">
             <img src="assets/house-exterior.jpeg" alt="House exterior" />
@@ -119,9 +137,9 @@
             </div>
             <div class="navigation-container">
                 <button class="nav-button prev">&lt;</button>
-                <button class="nav-button next">&gt;</button>
+                <button class="nav-button next">&gt;</button>               
                 <span class="image-title"></span>
-                <span class="image-counter"></span>
+                <span class="image-counter"></span>                            
             </div>          
         </div>
     </div>

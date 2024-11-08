@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const heartIcon = document.getElementById('heart-icon');
 
     const shareModal = document.getElementById('share-modal');
-    const closeModal = document.getElementById('close-modal');
-
+    const closeShareModal = document.getElementById('close-modal');
+    const copyLinkBtn = document.getElementById('copy-link');
 
     let counts = {
         adults: 2,
@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const images = [
         {
-            src: "./assets/house-resort.jpeg",
-            title: "Juneau Vacation Rental | 2BR | 1BA | 1,115 Sq Ft | Stairs Required",
+            src: "./assets/Juneau.jpg",
+            title: "Juneau Vacation Rental",
             alt: "Waterfront deck view"
         },
         {
@@ -77,19 +77,28 @@ document.addEventListener('DOMContentLoaded', () => {
         'US': 'USD - US Dollar',
         'GB': 'GBP - British Pound',
         'FR': 'EUR - Euro',
-        'DE': 'EUR - Euro'
+        'DE': 'EUR - Euro',
+        'CA': 'CAD - Canadian Dollar',
+        'AU': 'AUD - Australian Dollar',
+        'JP': 'JPY - Japanese Yen',
+        'CN': 'CNY - Chinese Yuan',
+        'BR': 'BRL - Brazilian Real',
+        'MX': 'MXN - Mexican Peso',
+        'RU': 'RUB - Russian Ruble',
+        'IN': 'INR - Indian Rupee',
+        'ZA': 'ZAR - South African Rand',
+        'SE': 'SEK - Swedish Krona',
     };
 
     currencyDisplay.value = regionCurrency[regionSelect.value];
 
-    // Open popup
+
     regionLink.addEventListener('click', (e) => {
         e.preventDefault();
         popup.style.display = 'block';
         document.body.style.overflow = 'hidden';
     });
 
-    // Close popup function
     const closePopup = () => {
         popup.style.display = 'none';
         document.body.style.overflow = '';
@@ -128,12 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Travelers Increment Decrement Functionality
 
-    // Open popup when clicking travelers input
     travelersButton.addEventListener('click', () => {
         travelersPopup.style.display = 'block';
     });
 
-    // Close popup when clicking done
     doneButton.addEventListener('click', () => {
         travelersPopup.style.display = 'none';
         updateTotalDisplay();
@@ -151,29 +158,24 @@ document.addEventListener('DOMContentLoaded', () => {
             counts[type]--;
         }
 
-        // Update respective count display
         const display = type === 'adults' ? adultsCountDisplay : childrenCountDisplay;
         display.textContent = counts[type];
 
-        // Update button states
         updateButtonStates();
         });
     });
 
 
+    // Update adult and children button
     function updateButtonStates() {
-        // Update adults buttons
         const adultDecrease = document.querySelector('.decrease[data-type="adults"]');
         const adultIncrease = document.querySelector('.increase[data-type="adults"]');
-        adultDecrease.disabled = counts.adults <= 1;
-        // adultIncrease.disabled = counts.adults >= 16;
+        adultDecrease.disabled = counts.adults <= 0;
         adultIncrease.disabled = false;
 
-        // Update children buttons
         const childDecrease = document.querySelector('.decrease[data-type="children"]');
         const childIncrease = document.querySelector('.increase[data-type="children"]');
         childDecrease.disabled = counts.children <= 0;
-        // childIncrease.disabled = counts.children >= 10;
         childIncrease.disabled = false
     }
 
@@ -200,12 +202,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentImageIndex = 0;
 
     function openModal(index) {
-        currentImageIndex = index;
+        currentImageIndex = index; 
         updateModalImage();
         modal.style.display = 'block';
-        // prevent scrolling when modal is open
         document.body.style.overflow = 'hidden';
     }
+    
+    // galleryImages.forEach((img, index) => {
+    //     img.addEventListener('click', () => openModal(index));
+    // });
+    
+    lastImage.addEventListener('click', () => openModal(images.length - 1)); 
 
     function closeModal() {
         modal.style.display = 'none';
@@ -219,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
         imageCounter.textContent = `${currentImageIndex + 1}/${images.length}`;
         imageTitle.textContent = images[currentImageIndex].title;
         
-        // Update navigation buttons
         prevBtn.disabled = currentImageIndex === 0;
         nextBtn.disabled = currentImageIndex === images.length - 1;
     }
@@ -238,17 +244,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Event Listeners
-    galleryImages.forEach((img, index) => {
-        img.addEventListener('click', () => openModal(index + 1));
-    });
 
     lastImage.addEventListener('click', () => openModal(0));
     closeBtn.addEventListener('click', closeModal);
     prevBtn.addEventListener('click', showPreviousImage);
     nextBtn.addEventListener('click', showNextImage);
 
-    // Close modal when clicking outside the image
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             closeModal();
@@ -283,16 +284,13 @@ document.addEventListener('DOMContentLoaded', () => {
         loveBtn.classList.add('btn-red');
     }
 
-    // Add click event listener to the share button
     shareBtn.addEventListener('click', () => {
         shareModal.classList.remove('hidden');
-        //shareBtn.classList.add('btn-red');
     });
 
 
-    // Add click event listener to the love button
+    // Toggle the heart icon text and update the localStorage
     loveBtn.addEventListener('click', () => {
-        // Toggle the heart icon text and update the localStorage
         if (heartIcon.textContent === '♡') {
             heartIcon.textContent = '♥';
             loveBtn.classList.add('btn-red');
@@ -304,28 +302,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Close the share modal when clicking outside of it
-    // window.addEventListener('click', (event) => {
-    //     if (event.target === shareModal) {
-    //         shareModal.classList.add('hidden');
-    //         shareBtn.classList.remove('btn-red');
-    //     }
-    // });
+    //Close the share modal when clicking outside of it
+    window.addEventListener('click', (event) => {
+        if (event.target === shareModal) {
+            shareModal.classList.add('hidden');
+        }
+    });
 
-    closeModal.addEventListener('click', () => {
+    closeShareModal.addEventListener('click', () => {
         shareModal.classList.add('hidden');
     });
 
-    // Function to copy the property link to the clipboard
-    function copyToClipboard() {
-        navigator.clipboard.writeText(window.location.href)
-            .then(() => {
-                alert('Property link copied to clipboard!');
-            })
-            .catch((error) => {
-                console.error('Failed to copy property link:', error);
-            });
+
+    // copy link function
+    copyLinkBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const currentUrl = window.location.href;
+        
+        const tempInput = document.createElement('input');
+        tempInput.value = currentUrl;
+        document.body.appendChild(tempInput);
+        
+        tempInput.select();
+        document.execCommand('copy');
+        
+        document.body.removeChild(tempInput);       
+        alert('Link copied to clipboard!');
         shareModal.classList.add('hidden');
-        //shareBtn.classList.remove('btn-red');
-    }
+    });
+
 });
